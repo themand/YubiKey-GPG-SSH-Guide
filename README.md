@@ -265,8 +265,8 @@ cp "$BINDIR"/shamir-split "$DESTDIR"/bin/linux/shamir-split && \
 cp "$BINDIR"/shamir-combine "$DESTDIR"/bin/linux/shamir-combine && \
 cp "$BINDIR"/macos-shamir-split "$DESTDIR"/bin/macos/shamir-split && \
 cp "$BINDIR"/macos-shamir-combine "$DESTDIR"/bin/macos/shamir-combine && \
-cp "$BINDIR"/win-shamir-split "$DESTDIR"/bin/win/shamir-split && \
-cp "$BINDIR"/win-shamir-combine "$DESTDIR"/bin/win/shamir-combine
+cp "$BINDIR"/win-shamir-split.exe "$DESTDIR"/bin/win/shamir-split.exe && \
+cp "$BINDIR"/win-shamir-combine.exe "$DESTDIR"/bin/win/shamir-combine.exe
 ```
 
 ### Optional: reset GPG and re-import keys
@@ -277,7 +277,8 @@ Erase GPG homedir:
 
 ```bash
 export GPGCONF=$(mktemp) && \
-mv "$GNUPGHOME"/gpg.conf "$GPGCONF" && \ 
+mv "$GNUPGHOME"/gpg.conf "$GPGCONF"
+
 srm -r "$GNUPGHOME" && \
 export GNUPGHOME=$(mktemp -d) && \
 mv "$GPGCONF" "$GNUPGHOME"/gpg.conf
