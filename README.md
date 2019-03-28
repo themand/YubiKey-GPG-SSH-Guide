@@ -235,7 +235,6 @@ Change desired threshold and number of shares.
 ```bash
 export SHAMIR_THRESHOLD=2 && \
 export SHAMIR_SHARES=3 && \
-cd "$EXPORTDIR"/secret && \
 "$BINDIR"/shamir-split "$SHAMIR_THRESHOLD" "$SHAMIR_SHARES" "$EXPORTDIR"/secret/"$KEYNAME".gpg-homedir.tar.gz -out "$EXPORTDIR"/secret/"$KEYNAME".gpg-homedir.tar.gz && \
 "$BINDIR"/shamir-split "$SHAMIR_THRESHOLD" "$SHAMIR_SHARES" "$EXPORTDIR"/secret/"$KEYNAME".gpg.master.key -out "$EXPORTDIR"/secret/"$KEYNAME".gpg.master.key && \
 "$BINDIR"/shamir-split "$SHAMIR_THRESHOLD" "$SHAMIR_SHARES" "$EXPORTDIR"/secret/"$KEYNAME".gpg.sub.key -out "$EXPORTDIR"/secret/"$KEYNAME".gpg.sub.key && \
@@ -306,15 +305,7 @@ You should see a master key (sec) and three subkeys (ssb).
 
 ### Configure YubiKey GPG Smartcard
 
-#### Require touch for GPG operations
-
-```bash
-"$BINDIR"/yubitouch sig on && \
-"$BINDIR"/yubitouch aut on && \
-"$BINDIR"/yubitouch dec on
-``` 
-
-#### Change PIN and Admin PIN
+Change PIN and Admin PIN:
 
 ```
 gpg --card-edit
@@ -363,6 +354,16 @@ gpg --list-secret-keys
 ```
 
 You should see a master key (sec) and three subkeys (ssb). The subkeys should exist only on keycard, which is indicated by *>* after ssb: *ssb>*
+
+### Require touch for GPG operations
+
+If you want to require touch every time a GPG operation is performed:
+
+```bash
+"$BINDIR"/yubitouch sig on && \
+"$BINDIR"/yubitouch aut on && \
+"$BINDIR"/yubitouch dec on
+``` 
 
 ### Cleanup
 
